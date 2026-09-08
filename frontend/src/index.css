@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-mine-bg: #0a0e1a;
+  --color-mine-card: #111827;
+  --color-mine-border: #1e2d45;
+  --color-mine-accent: #0ea5e9;
+  --color-mine-cyan: #06b6d4;
+  --color-mine-safe: #22c55e;
+  --color-mine-watch: #eab308;
+  --color-mine-warning: #f97316;
+  --color-mine-critical: #ef4444;
+  --font-family-sans: 'Inter', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-card: #121212;
+  --bg-card-2: #1a1a1a;
+  --border: #262626;
+  --accent: #404040;
+  --cyan: #e5e5e5;
+  --text-primary: #ededed;
+  --text-secondary: #a3a3a3;
+  --safe: #22c55e;
+  --watch: #eab308;
+  --warning: #f97316;
+  --critical: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e2d45;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0ea5e9;
+}
+
+/* Minimal card */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+/* Risk level colors */
+.risk-safe {
+  color: var(--safe);
+}
+
+.risk-watch {
+  color: var(--watch);
+}
+
+.risk-warning {
+  color: var(--warning);
+}
+
+.risk-critical {
+  color: var(--critical);
+}
+
+.bg-risk-safe {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.bg-risk-watch {
+  background: rgba(234, 179, 8, 0.12);
+  border-color: rgba(234, 179, 8, 0.3);
+}
+
+.bg-risk-warning {
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+.bg-risk-critical {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* Prototype badge */
+.prototype-badge {
+  background: repeating-linear-gradient(45deg,
+      rgba(234, 179, 8, 0.1),
+      rgba(234, 179, 8, 0.1) 10px,
+      rgba(0, 0, 0, 0) 10px,
+      rgba(0, 0, 0, 0) 20px);
+  border: 1px solid rgba(234, 179, 8, 0.4);
+}
+
+/* Sensor value input */
+.sensor-input {
+  background: #1a1a1a;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.sensor-input:focus {
+  outline: none;
+  border-color: #555;
+  background: #222;
+}
+
+/* Critical pulsing border */
+@keyframes criticalPulse {
+
+  0%,
+  100% {
+    border-color: rgba(239, 68, 68, 0.4);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+  }
+
+  50% {
+    border-color: rgba(239, 68, 68, 0.9);
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
+  }
+}
+
+.critical-pulse {
+  animation: criticalPulse 2s ease-in-out infinite;
+}
+
+/* Node dot pulse */
+@keyframes nodePulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
+.node-pulse {
+  animation: nodePulse 2s ease-in-out infinite;
+}
+
+/* Slide in from top */
+@keyframes slideDown {
+  from {
+    transform: translateY(-12px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-down {
+  animation: slideDown 0.35s ease-out;
+}
+
+/* Status dot blink */
+@keyframes statusBlink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.status-blink {
+  animation: statusBlink 1.5s ease-in-out infinite;
+}
+
+/* Grid lines background (removed for minimalism) */
+.grid-bg {
+  background: none;
+}
+
+/* Button styles */
+.btn-primary {
+  background: #ededed;
+  color: #0a0a0a;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: #d4d4d4;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+}
+
+.btn-success {
+  background: #22c55e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-success:hover {
+  background: #16a34a;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #a3a3a3;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-ghost:hover {
+  background: #1a1a1a;
+  color: #ededed;
+}
+
+/* Section headers */
+.section-header {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+
+/* Loading spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(14, 165, 233, 0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+/* Demo mode banner */
+@keyframes demoGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
+  }
+}
+
+.demo-banner {
+  animation: demoGlow 2s ease-in-out infinite;
+}
+
+/* Alert item */
+.alert-item {
+  border-left: 3px solid;
+  padding: 10px 12px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 8px;
+}
+
+/* Gauge ring */
+.gauge-ring {
+  filter: drop-shadow(0 0 8px currentColor);
+}
